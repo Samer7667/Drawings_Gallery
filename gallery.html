@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الأعمال الكامل - معرضنا الفني الصغير</title>
+    <style>
+        /* أنماط مشتركة مع الصفحة الرئيسية */
+        /* ... نفس الأنماط الموجودة في الصفحة الرئيسية ... */
+        
+        /* أنماط إضافية لصفحة المعرض */
+        .gallery-page {
+            padding: 100px 0 50px;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-button {
+            padding: 8px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        .full-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/50x50" alt="شعار الموقع" id="logo-img">
+                <span class="logo-text">معرضنا الفني</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="gallery.html" class="active">معرض الأعمال</a></li>
+                    <li><a href="#ratings">التقييمات</a></li>
+                    <li><a href="#family">مشاركة الأسر</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- محتوى صفحة المعرض -->
+    <section class="gallery-page">
+        <div class="container">
+            <h2 class="section-title">معرض الأعمال الكامل</h2>
+            
+            <div class="filters">
+                <button class="filter-button active" data-filter="all">الكل</button>
+                <button class="filter-button" data-filter="3-5">3-5 سنوات</button>
+                <button class="filter-button" data-filter="6-8">6-8 سنوات</button>
+                <button class="filter-button" data-filter="رسم">رسم</button>
+                <button class="filter-button" data-filter="عمل يدوي">عمل يدوي</button>
+                <button class="filter-button" data-filter="تصوير">تصوير</button>
+            </div>
+            
+            <div class="full-gallery" id="full-gallery">
+                <!-- سيتم ملؤها بواسطة JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المعرض</h3>
+                    <p>معرضنا الفني الصغير هو منصة لعرض إبداعات الأطفال وتشجيع مواهبهم الفنية منذ الصغر.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <a href="index.html">الرئيسية</a>
+                    <a href="gallery.html">معرض الأعمال</a>
+                    <a href="#family">مشاركة الأسر</a>
+                    <a href="#contact">تواصل معنا</a>
+                </div>
+                <div class="footer-column">
+                    <h3>تواصل معنا</h3>
+                    <p><i class="fas fa-envelope"></i> info@ourartgallery.com</p>
+                    <p><i class="fas fa-phone"></i> +123456789</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © <span id="year"></span> معرضنا الفني. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة التقييم (نفسها في الصفحة الرئيسية) -->
+    <div class="modal" id="rating-modal">
+        <!-- ... نفس محتوى نافذة التقييم في الصفحة الرئيسية ... -->
+    </div>
+
+    <script>
+        // بيانات الأعمال الفنية (نفسها في الصفحة الرئيسية)
+        const artworks = [
+            {
+                id: "artwork1",
+                title: "اللوحة الأولى",
+                image: "https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=رسم+طفل",
+                student: "محمد أحمد",
+                age: "6 سنوات",
+                grade: "الأول ابتدائي",
+                category: "رسم",
+                ageGroup: "6-8"
+            },
+            {
+                id: "artwork2",
+                title: "اللوحة الثانية",
+                image: "https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=عمل+يدوي",
+                student: "يوسف خالد",
+                age: "5 سنوات",
+                grade: "التمهيدي",
+                category: "عمل يدوي",
+                ageGroup: "3-5"
+            },
+            {
+                id: "artwork3",
+                title: "اللوحة الثالثة",
+                image: "https://via.placeholder.com/300x200/FFE66D/000000?text=تصوير",
+                student: "سارة علي",
+                age: "7 سنوات",
+                grade: "الثاني ابتدائي",
+                category: "تصوير",
+                ageGroup: "6-8"
+            },
+            {
+                id: "artwork4",
+                title: "اللوحة الرابعة",
+                image: "https://via.placeholder.com/300x200/292F36/FFFFFF?text=فن+تجريدي",
+                student: "نورا محمد",
+                age: "8 سنوات",
+                grade: "الثالث ابتدائي",
+                category: "رسم",
+                ageGroup: "6-8"
+            },
+            {
+                id: "artwork5",
+                title: "اللوحة الخامسة",
+                image: "https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=رسم+ألوان",
+                student: "عمر سامي",
+                age: "4 سنوات",
+                grade: "التمهيدي",
+                category: "رسم",
+                ageGroup: "3-5"
+            },
+            {
+                id: "artwork6",
+                title: "اللوحة السادسة",
+                image: "https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=فن+ورقي",
+                student: "ليلى كريم",
+                age: "5 سنوات",
+                grade: "التمهيدي",
+                category: "عمل يدوي",
+                ageGroup: "3-5"
+            },
+            {
+                id: "artwork7",
+                title: "اللوحة السابعة",
+                image: "https://via.placeholder.com/300x200/FFE66D/000000?text=رسم+طبيعة",
+                student: "خالد وليد",
+                age: "7 سنوات",
+                grade: "الثاني ابتدائي",
+                category: "رسم",
+                ageGroup: "6-8"
+            },
+            {
+                id: "artwork8",
+                title: "اللوحة الثامنة",
+                image: "https://via.placeholder.com/300x200/292F36/FFFFFF?text=تصوير+فوتوغرافي",
+                student: "هديل علي",
+                age: "8 سنوات",
+                grade: "الثالث ابتدائي",
+                category: "تصوير",
+                ageGroup: "6-8"
+            }
+        ];
+
+        // عرض المعرض الكامل مع التصفية
+        function displayFullGallery(filter = 'all') {
+            const galleryContainer = document.getElementById('full-gallery');
+            galleryContainer.innerHTML = '';
+            
+            let filteredArtworks = artworks;
+            
+            if (filter !== 'all') {
+                if (filter === '3-5' || filter === '6-8') {
+                    filteredArtworks = artworks.filter(a => a.ageGroup === filter);
+                } else {
+                    filteredArtworks = artworks.filter(a => a.category === filter);
+                }
+            }
+            
+            filteredArtworks.forEach(artwork => {
+                const artworkElement = document.createElement('div');
+                artworkElement.className = 'artwork-card';
+                artworkElement.innerHTML = `
+                    <img src="${artwork.image}" alt="${artwork.title}" class="artwork-img">
+                    <div class="artwork-info">
+                        <h3>${artwork.student}</h3>
+                        <p>العمر: ${artwork.age}</p>
+                        <p>النوع: ${artwork.category}</p>
+                    </div>
+                `;
+                artworkElement.addEventListener('click', () => openModal(artwork.id));
+                galleryContainer.appendChild(artworkElement);
+            });
+        }
+
+        // تهيئة الصفحة عند التحميل
+        window.onload = function() {
+            displayFullGallery();
+            
+            // إضافة أحداث لأزرار التصفية
+            document.querySelectorAll('.filter-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    displayFullGallery(this.dataset.filter);
+                });
+            });
+            
+            // إعداد السنة في حقوق النشر
+            document.getElementById('year').textContent = new Date().getFullYear();
+        }
+
+        // باقي الدوال (openModal, closeModal, rate, resetRating) نفسها في الصفحة الرئيسية
+    </script>
+</body>
+</html>
