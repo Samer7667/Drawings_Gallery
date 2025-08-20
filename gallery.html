@@ -3,261 +3,883 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض الأعمال الكامل - معرضنا الفني الصغير</title>
+    <title>معرض الأعمال - مدرسة أبي فراس الحمداني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* أنماط مشتركة مع الصفحة الرئيسية */
-        /* ... نفس الأنماط الموجودة في الصفحة الرئيسية ... */
-        
-        /* أنماط إضافية لصفحة المعرض */
-        .gallery-page {
-            padding: 100px 0 50px;
+        /* أساسيات التصميم - نفس تنسيق الصفحة الرئيسية */
+        :root {
+            --primary-blue: #4fc3f7;
+            --primary-pink: #f48fb1;
+            --primary-yellow: #fff176;
+            --primary-green: #81c784;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
         }
         
-        .filters {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الترويسة */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-left: 15px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .school-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 10px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--primary-yellow);
+        }
+        
+        /* قسم التصفية */
+        .filters-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .filters-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+        
+        .filter-options {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
-        .filter-button {
-            padding: 8px 20px;
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .filter-group select {
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--primary-blue);
             background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
         }
         
-        .filter-button:hover, .filter-button.active {
-            background-color: var(--secondary-color);
-            color: white;
-            border-color: var(--secondary-color);
+        /* معرض الصور */
+        .gallery-section {
+            padding: 20px 0 60px;
         }
         
-        .full-gallery {
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary-green);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-yellow);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 25px;
+        }
+        
+        .artwork-item {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .artwork-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .artwork-image {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .artwork-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .artwork-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+        
+        /* نافذة التقييم المنبثقة */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .rating-modal {
+            background-color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            position: relative;
+            transform: translateY(50px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .rating-modal {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .modal-artwork {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .modal-image {
+            flex: 1;
+            min-width: 250px;
+            height: 250px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .modal-details {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .modal-details h2 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        
+        .student-info {
+            margin-bottom: 20px;
+        }
+        
+        .student-info p {
+            margin-bottom: 5px;
+        }
+        
+        .rating-system {
+            margin: 20px 0;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .star {
+            color: #ddd;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+        
+        .star.active {
+            color: var(--primary-yellow);
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin: 10px 0;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-rating {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-rating:hover {
+            background-color: var(--primary-blue);
+        }
+        
+        /* قسم التعليقات */
+        .comments-section {
+            margin-top: 30px;
+        }
+        
+        .comments-title {
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+        
+        .comment {
+            background-color: var(--light-bg);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .share-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: var(--light-bg);
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            background-color: var(--primary-yellow);
+        }
+        
+        /* التذييل */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-left: 10px;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .whatsapp-btn i {
+            margin-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-group {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .modal-artwork {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- الهيدر -->
+    <!-- الترويسة -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="https://via.placeholder.com/50x50" alt="شعار الموقع" id="logo-img">
-                <span class="logo-text">معرضنا الفني</span>
+        <div class="container header-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="school-name">مدرسة أبي فراس الحمداني للطفولة المبكرة</div>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">الرئيسية</a></li>
                     <li><a href="gallery.html" class="active">معرض الأعمال</a></li>
-                    <li><a href="#ratings">التقييمات</a></li>
-                    <li><a href="#family">مشاركة الأسر</a></li>
-                    <li><a href="#contact">تواصل معنا</a></li>
+                    <li><a href="#">التقييمات</a></li>
+                    <li><a href="#">مشاركة الأسر</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- محتوى صفحة المعرض -->
-    <section class="gallery-page">
+    <!-- قسم التصفية -->
+    <section class="filters-section">
         <div class="container">
-            <h2 class="section-title">معرض الأعمال الكامل</h2>
-            
-            <div class="filters">
-                <button class="filter-button active" data-filter="all">الكل</button>
-                <button class="filter-button" data-filter="3-5">3-5 سنوات</button>
-                <button class="filter-button" data-filter="6-8">6-8 سنوات</button>
-                <button class="filter-button" data-filter="رسم">رسم</button>
-                <button class="filter-button" data-filter="عمل يدوي">عمل يدوي</button>
-                <button class="filter-button" data-filter="تصوير">تصوير</button>
-            </div>
-            
-            <div class="full-gallery" id="full-gallery">
-                <!-- سيتم ملؤها بواسطة JavaScript -->
+            <h3 class="filters-title">تصفية المعرض</h3>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="age-filter">العمر</label>
+                    <select id="age-filter">
+                        <option value="all">جميع الأعمار</option>
+                        <option value="3-5">3-5 سنوات</option>
+                        <option value="6-8">6-8 سنوات</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="type-filter">نوع العمل</label>
+                    <select id="type-filter">
+                        <option value="all">جميع الأعمال</option>
+                        <option value="drawing">رسم</option>
+                        <option value="craft">عمل يدوي</option>
+                        <option value="photography">تصوير</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر -->
-    <footer id="contact">
+    <!-- معرض الصور -->
+    <section class="gallery-section">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>عن المعرض</h3>
-                    <p>معرضنا الفني الصغير هو منصة لعرض إبداعات الأطفال وتشجيع مواهبهم الفنية منذ الصغر.</p>
+            <h2 class="section-title">معرض الأعمال الكامل</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- سيتم ملء هذا القسم تلقائياً بواسطة JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- نافذة التقييم المنبثقة -->
+    <div class="modal-overlay" id="rating-modal">
+        <div class="rating-modal">
+            <button class="close-modal" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-content">
+                <div class="modal-artwork">
+                    <div class="modal-image" id="modal-art-image">
+                        <i class="fas fa-palette" id="modal-art-icon"></i>
+                    </div>
+                    
+                    <div class="modal-details">
+                        <h2 id="modal-art-title">لوحة فنية</h2>
+                        
+                        <div class="student-info">
+                            <p><strong>الاسم:</strong> <span id="modal-artist-name">ليان أحمد</span></p>
+                            <p><strong>العمر:</strong> <span id="modal-artist-age">5 سنوات</span></p>
+                            <p><strong>الصف:</strong> <span id="modal-artist-class">الروضة الثانية</span></p>
+                            <p><strong>نوع العمل:</strong> <span id="modal-art-type">رسم</span></p>
+                        </div>
+                        
+                        <div class="rating-system">
+                            <h3>قيم هذا العمل:</h3>
+                            <div class="stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            
+                            <textarea placeholder="اكتب كلمة تشجيعية للطالب..."></textarea>
+                            
+                            <button class="submit-rating">إرسال التقييم</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-column">
-                    <h3>روابط سريعة</h3>
-                    <a href="index.html">الرئيسية</a>
-                    <a href="gallery.html">معرض الأعمال</a>
-                    <a href="#family">مشاركة الأسر</a>
-                    <a href="#contact">تواصل معنا</a>
-                </div>
-                <div class="footer-column">
-                    <h3>تواصل معنا</h3>
-                    <p><i class="fas fa-envelope"></i> info@ourartgallery.com</p>
-                    <p><i class="fas fa-phone"></i> +123456789</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                
+                <div class="comments-section">
+                    <h3 class="comments-title">تعليقات الأسر:</h3>
+                    <div id="comments-container">
+                        <!-- سيتم ملء التعليقات هنا -->
+                    </div>
+                    
+                    <div class="share-buttons">
+                        <a href="#" class="share-button" id="whatsapp-share">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>مشاركة عبر واتساب</span>
+                        </a>
+                        <a href="#" class="share-button" id="copy-link">
+                            <i class="fas fa-link"></i>
+                            <span>نسخ الرابط</span>
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>معلومات التواصل</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-school"></i> مدرسة أبي فراس الحمداني للطفولة المبكرة</p>
+                        <p><i class="fas fa-envelope"></i> SP923765@rg.moe.gov.sa</p>
+                        <p><i class="fas fa-phone"></i> 0553566603</p>
+                        <a href="https://wa.me/966553566603" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> واتساب
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
             <div class="copyright">
-                © <span id="year"></span> معرضنا الفني. جميع الحقوق محفوظة.
+                © 2025 معرضنا الفني. جميع الحقوق محفوظة.
             </div>
         </div>
     </footer>
 
-    <!-- نافذة التقييم (نفسها في الصفحة الرئيسية) -->
-    <div class="modal" id="rating-modal">
-        <!-- ... نفس محتوى نافذة التقييم في الصفحة الرئيسية ... -->
-    </div>
-
     <script>
-        // بيانات الأعمال الفنية (نفسها في الصفحة الرئيسية)
-        const artworks = [
-            {
-                id: "artwork1",
-                title: "اللوحة الأولى",
-                image: "https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=رسم+طفل",
-                student: "محمد أحمد",
-                age: "6 سنوات",
-                grade: "الأول ابتدائي",
-                category: "رسم",
-                ageGroup: "6-8"
-            },
-            {
-                id: "artwork2",
-                title: "اللوحة الثانية",
-                image: "https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=عمل+يدوي",
-                student: "يوسف خالد",
-                age: "5 سنوات",
-                grade: "التمهيدي",
-                category: "عمل يدوي",
-                ageGroup: "3-5"
-            },
-            {
-                id: "artwork3",
-                title: "اللوحة الثالثة",
-                image: "https://via.placeholder.com/300x200/FFE66D/000000?text=تصوير",
-                student: "سارة علي",
-                age: "7 سنوات",
-                grade: "الثاني ابتدائي",
-                category: "تصوير",
-                ageGroup: "6-8"
-            },
-            {
-                id: "artwork4",
-                title: "اللوحة الرابعة",
-                image: "https://via.placeholder.com/300x200/292F36/FFFFFF?text=فن+تجريدي",
-                student: "نورا محمد",
-                age: "8 سنوات",
-                grade: "الثالث ابتدائي",
-                category: "رسم",
-                ageGroup: "6-8"
-            },
-            {
-                id: "artwork5",
-                title: "اللوحة الخامسة",
-                image: "https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=رسم+ألوان",
-                student: "عمر سامي",
-                age: "4 سنوات",
-                grade: "التمهيدي",
-                category: "رسم",
-                ageGroup: "3-5"
-            },
-            {
-                id: "artwork6",
-                title: "اللوحة السادسة",
-                image: "https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=فن+ورقي",
-                student: "ليلى كريم",
-                age: "5 سنوات",
-                grade: "التمهيدي",
-                category: "عمل يدوي",
-                ageGroup: "3-5"
-            },
-            {
-                id: "artwork7",
-                title: "اللوحة السابعة",
-                image: "https://via.placeholder.com/300x200/FFE66D/000000?text=رسم+طبيعة",
-                student: "خالد وليد",
-                age: "7 سنوات",
-                grade: "الثاني ابتدائي",
-                category: "رسم",
-                ageGroup: "6-8"
-            },
-            {
-                id: "artwork8",
-                title: "اللوحة الثامنة",
-                image: "https://via.placeholder.com/300x200/292F36/FFFFFF?text=تصوير+فوتوغرافي",
-                student: "هديل علي",
-                age: "8 سنوات",
-                grade: "الثالث ابتدائي",
-                category: "تصوير",
-                ageGroup: "6-8"
-            }
-        ];
-
-        // عرض المعرض الكامل مع التصفية
-        function displayFullGallery(filter = 'all') {
-            const galleryContainer = document.getElementById('full-gallery');
-            galleryContainer.innerHTML = '';
+        // بيانات الأعمال الفنية (سيتم تحميلها من localStorage)
+        let artworks = JSON.parse(localStorage.getItem('artworks')) || [];
+        let ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        
+        // عناصر DOM
+        const ageFilter = document.getElementById('age-filter');
+        const typeFilter = document.getElementById('type-filter');
+        const galleryContainer = document.getElementById('gallery-container');
+        const modalOverlay = document.getElementById('rating-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const stars = document.querySelectorAll('.star');
+        const submitRatingBtn = document.querySelector('.submit-rating');
+        const commentsContainer = document.getElementById('comments-container');
+        const whatsappShare = document.getElementById('whatsapp-share');
+        const copyLink = document.getElementById('copy-link');
+        
+        // تحميل الأعمال الفنية عند بدء التشغيل
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGallery();
             
-            let filteredArtworks = artworks;
+            // تطبيق التصفية
+            ageFilter.addEventListener('change', applyFilters);
+            typeFilter.addEventListener('change', applyFilters);
             
-            if (filter !== 'all') {
-                if (filter === '3-5' || filter === '6-8') {
-                    filteredArtworks = artworks.filter(a => a.ageGroup === filter);
-                } else {
-                    filteredArtworks = artworks.filter(a => a.category === filter);
-                }
-            }
+            // إغلاق النافذة المنبثقة
+            closeModalBtn.addEventListener('click', closeModal);
             
-            filteredArtworks.forEach(artwork => {
-                const artworkElement = document.createElement('div');
-                artworkElement.className = 'artwork-card';
-                artworkElement.innerHTML = `
-                    <img src="${artwork.image}" alt="${artwork.title}" class="artwork-img">
-                    <div class="artwork-info">
-                        <h3>${artwork.student}</h3>
-                        <p>العمر: ${artwork.age}</p>
-                        <p>النوع: ${artwork.category}</p>
-                    </div>
-                `;
-                artworkElement.addEventListener('click', () => openModal(artwork.id));
-                galleryContainer.appendChild(artworkElement);
-            });
-        }
-
-        // تهيئة الصفحة عند التحميل
-        window.onload = function() {
-            displayFullGallery();
-            
-            // إضافة أحداث لأزرار التصفية
-            document.querySelectorAll('.filter-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-button').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    displayFullGallery(this.dataset.filter);
+            // التقييم بالنجوم
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    setRating(value);
                 });
             });
             
-            // إعداد السنة في حقوق النشر
-            document.getElementById('year').textContent = new Date().getFullYear();
+            // إرسال التقييم
+            submitRatingBtn.addEventListener('click', submitRating);
+            
+            // مشاركة عبر واتساب
+            whatsappShare.addEventListener('click', function(e) {
+                e.preventDefault();
+                shareOnWhatsApp();
+            });
+            
+            // نسخ الرابط
+            copyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                copyArtworkLink();
+            });
+            
+            // التحقق إذا كان هناك عمل فني محدد في URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const artworkId = urlParams.get('artwork');
+            if (artworkId) {
+                openRatingModal(parseInt(artworkId));
+            }
+        });
+        
+        // تحميل المعرض
+        function loadGallery() {
+            galleryContainer.innerHTML = '';
+            
+            if (artworks.length === 0) {
+                galleryContainer.innerHTML = `
+                    <div class="no-artworks">
+                        <p>لا توجد أعمال فنية حتى الآن. استخدم لوحة التحكم في الصفحة الرئيسية لإضافة أعمال جديدة.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            artworks.forEach(artwork => {
+                const ageGroup = artwork.studentAge <= 5 ? '3-5' : '6-8';
+                
+                const artworkItem = document.createElement('div');
+                artworkItem.className = 'artwork-item';
+                artworkItem.setAttribute('data-age', ageGroup);
+                artworkItem.setAttribute('data-type', artwork.artworkType);
+                artworkItem.innerHTML = `
+                    <div class="artwork-image" style="background-image: url('${artwork.artworkImage}')">
+                        ${!artwork.artworkImage ? '<i class="fas fa-palette"></i>' : ''}
+                    </div>
+                    <div class="artwork-info">
+                        <h3>${artwork.studentName}</h3>
+                        <p>${artwork.studentAge} سنوات - ${artwork.artworkType}</p>
+                    </div>
+                `;
+                
+                artworkItem.addEventListener('click', function() {
+                    openRatingModal(artwork.id);
+                });
+                
+                galleryContainer.appendChild(artworkItem);
+            });
+            
+            applyFilters();
         }
-
-        // باقي الدوال (openModal, closeModal, rate, resetRating) نفسها في الصفحة الرئيسية
+        
+        // تطبيق التصفية
+        function applyFilters() {
+            const ageValue = ageFilter.value;
+            const typeValue = typeFilter.value;
+            const artworkItems = document.querySelectorAll('.artwork-item');
+            
+            artworkItems.forEach(item => {
+                const itemAge = item.getAttribute('data-age');
+                const itemType = item.getAttribute('data-type');
+                
+                const ageMatch = ageValue === 'all' || itemAge === ageValue;
+                const typeMatch = typeValue === 'all' || itemType === typeValue;
+                
+                if (ageMatch && typeMatch) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // فتح نافذة التقييم
+        function openRatingModal(artworkId) {
+            const artwork = artworks.find(a => a.id === artworkId);
+            if (!artwork) return;
+            
+            // تعبئة البيانات في النافذة المنبثقة
+            document.getElementById('modal-artist-name').textContent = artwork.studentName;
+            document.getElementById('modal-artist-age').textContent = `${artwork.studentAge} سنوات`;
+            document.getElementById('modal-art-type').textContent = artwork.artworkType;
+            document.getElementById('modal-art-title').textContent = `لوحة ${artwork.studentName}`;
+            
+            // تعيين صورة العمل الفني
+            const modalImage = document.getElementById('modal-art-image');
+            if (artwork.artworkImage) {
+                modalImage.style.backgroundImage = `url('${artwork.artworkImage}')`;
+                modalImage.innerHTML = '';
+            } else {
+                modalImage.style.backgroundImage = 'none';
+                modalImage.innerHTML = '<i class="fas fa-palette"></i>';
+            }
+            
+            // تحميل التعليقات
+            loadComments(artworkId);
+            
+            // إظهار النافذة
+            modalOverlay.classList.add('active');
+            
+            // حفظ معرف العمل الفني في الزر لإرسال التقييم
+            submitRatingBtn.setAttribute('data-artwork-id', artworkId);
+        }
+        
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            
+            // إعادة تعيين النجوم
+            setRating(0);
+        }
+        
+        // تعيين التقييم بالنجوم
+        function setRating(value) {
+            stars.forEach(star => {
+                const starValue = parseInt(star.getAttribute('data-value'));
+                if (starValue <= value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        // إرسال التقييم
+        function submitRating() {
+            const artworkId = parseInt(submitRatingBtn.getAttribute('data-artwork-id'));
+            const ratingValue = document.querySelectorAll('.star.active').length;
+            const commentText = document.querySelector('.modal-content textarea').value;
+            
+            if (ratingValue === 0 && !commentText) {
+                alert('يرجى إضافة تقييم أو تعليق');
+                return;
+            }
+            
+            // حفظ التقييم
+            if (ratingValue > 0) {
+                ratings.push({
+                    artworkId,
+                    rating: ratingValue,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('ratings', JSON.stringify(ratings));
+            }
+            
+            // حفظ التعليق
+            if (commentText) {
+                comments.push({
+                    artworkId,
+                    comment: commentText,
+                    author: 'زائر',
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('comments', JSON.stringify(comments));
+                
+                // إعادة تحميل التعليقات
+                loadComments(artworkId);
+            }
+            
+            // إعادة تعيين النموذج
+            setRating(0);
+            document.querySelector('.modal-content textarea').value = '';
+            
+            alert('شكراً لك على تقييمك وتشجيعك للطالب!');
+        }
+        
+        // تحميل التعليقات
+        function loadComments(artworkId) {
+            const artworkComments = comments.filter(c => c.artworkId === artworkId);
+            commentsContainer.innerHTML = '';
+            
+            if (artworkComments.length === 0) {
+                commentsContainer.innerHTML = '<p>لا توجد تعليقات حتى الآن. كن أول من يعلق!</p>';
+                return;
+            }
+            
+            artworkComments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <p class="comment-author">${comment.author}:</p>
+                    <p>${comment.comment}</p>
+                `;
+                commentsContainer.appendChild(commentElement);
+            });
+        }
+        
+        // مشاركة عبر واتساب
+        function shareOnWhatsApp() {
+            const artworkId = submitRatingBtn.getAttribute('data-artwork-id');
+            const artwork = artworks.find(a => a.id === parseInt(artworkId));
+            
+            if (artwork) {
+                const text = `انظر إلى هذا العمل الفني الرائع للطالب ${artwork.studentName} في معرض مدرسة أبي فراس الحمداني!`;
+                const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                window.open(url, '_blank');
+            }
+        }
+        
+        // نسخ رابط العمل الفني
+        function copyArtworkLink() {
+            const artworkId = submitRatingBtn.getAttribute('data-artwork-id');
+            const url = `${window.location.origin}${window.location.pathname}?artwork=${artworkId}`;
+            
+            navigator.clipboard.writeText(url).then(() => {
+                alert('تم نسخ الرابط إلى الحافظة!');
+            });
+        }
     </script>
 </body>
 </html>
